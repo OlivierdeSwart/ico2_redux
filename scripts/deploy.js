@@ -7,10 +7,10 @@
 const hre = require("hardhat");
 
 async function main() {
-const NAME = 'Dapp University'
-const SYMBOL = 'DAPP'
-const MAX_SUPPLY = '1000000'
-const PRICE = ethers.utils.parseUnits('0.025','ether')
+  const NAME = 'Dapp University'
+  const SYMBOL = 'DAPP'
+  const MAX_SUPPLY = '1000000'
+  const PRICE = ethers.utils.parseUnits('0.025','ether')
 
   const Token = await hre.ethers.getContractFactory('Token')
   let token = await Token.deploy(NAME,SYMBOL,MAX_SUPPLY)
