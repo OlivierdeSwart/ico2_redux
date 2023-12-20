@@ -9,6 +9,9 @@ import Loading from './Loading';
 import Progress from './Progress';
 import Buy from './Buy';
 
+import { setAccount } from '../store/reducers/provider'
+import { useDispatch } from 'react-redux'
+
 // ABIs
 import TOKEN_ABI from '../abis/Token.json'
 import CROWDSALE_ABI from '../abis/Crowdsale.json'
@@ -17,10 +20,14 @@ import CROWDSALE_ABI from '../abis/Crowdsale.json'
 import config from '../config.json';
 
 function App() {
+  let account = '0x0...'
+
+  const dispatch = useDispatch()
+
   const [provider, setProvider] = useState(null)
   const [crowdsale, setCrowdsale] = useState(null)
 
-  const [account, setAccount] = useState(null)
+  // const [account, setAccount] = useState(null)
   const [accountBalance, setAccountBalance] = useState(0)
 
 
@@ -46,7 +53,7 @@ function App() {
     //initiate accounts
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const account = ethers.utils.getAddress(accounts[0])
-    setAccount(account)
+    dispatch(setAccount(account))
 
     //fetch account balance
     const accountBalance = ethers.utils.formatUnits(await token.balanceOf(account), 18)
